@@ -21,11 +21,14 @@ namespace Shape
             {
                 throw new TriangleException();
             }
-            if ((a == b) & (b == c))
+
+            int NumberOfEqualSides = GetNumberOfEqualSides(a, b, c);
+
+            if (NumberOfEqualSides == 3)
             {
                 return TriangleKind.Equilateral;
             }
-            else if ((a == b) || (b == c) || (a == c))
+            else if (NumberOfEqualSides == 2)
             {
                 return TriangleKind.Isosceles;
             }
@@ -33,6 +36,18 @@ namespace Shape
             {
                 return TriangleKind.Scalene;
             }
+        }
+
+        private static int GetNumberOfEqualSides(decimal a, decimal b, decimal c)
+        {
+            if ((a == b) & (b == c))
+            {
+                return 3;
+            } else if ((a == b) || (b == c) || (a == c))
+            {
+                return 2;
+            }
+            return 0;
         }
 
         private static bool NotATriangle(decimal a, decimal b, decimal c)
